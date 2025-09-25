@@ -1,0 +1,115 @@
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BokaDinTid.nu</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="scripts" href="myScript.js">
+  <script defer src="app.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="bilder/logo.png" alt="logo.png" width="100" height="100">
+                </a>
+            </div>
+
+            <div class="search-bar">
+                <input type="text" placeholder="Sök tjänst...">
+                <input type="text" placeholder="Plats...">
+                <button class="search-button" type="submit">Sök</button>
+                <button class="search-toggle" aria-expanded="false" aria-label="Visa sok">🔍</button>
+            </div>
+
+            
+            <ul class="nav-links">
+                <li id="Hem"><a href="#home">Hem</a></li>
+                <li id="Info"><a href="#about">Om Oss</a></li>
+                <li id="Registrera"><a href="login.html">Registrera dig</a></li>
+                <li id="Kontakt"><a href="#contact">Kontakt</a></li>
+            </ul>
+            <button class="menu-toggle" aria-expanded="false" aria-label="Öppna meny">☰</button>
+
+        </nav>
+    </header>
+    <h1>Välkommen till BokaDinTid.nu</h1>
+    <div class="image-container">
+        <img id="blandat" src="bilder/blandat.png" alt="blandade bilder" height="280px">
+        <img id="behandling" src="bilder/behandling.jpg" alt="behandling.jpg" height="280px">
+        <img id="frisör" src="bilder/frisör.jpg" alt="frisör bild" height="280px">
+        <img id="smink" src="bilder/blandat1.PNG" alt="blandade bilder" height="280px">
+    </div>
+    <div class="button-container">
+        <button id="boka">Boka Tid</button>
+        <button id="inloggning">Logga in</button>
+    </div>
+    <h2 id="category">Kategorier</h2>
+    <div class="category">
+        <div class="box1">
+            <div class="overlay">Exempel text</div>
+            <p>Klippning</p>
+        </div>
+        <div class="box2">
+            <p>Anisktsbehandling</p>
+            <div class="overlay">Exempel text</div>
+        </div>
+        <div class="box3">
+            <p>Nagelbehandling</p>
+            <div class="overlay">Exempel text</div>
+        </div>
+        <div class="box4">
+            <p>Massage</p>
+            <div class="overlay">Exempel text</div>
+        </div>
+        <div class="box5">
+            <p>Hårvård</p>
+            <div class="overlay">Exempel text</div>
+        </div>
+        <div class="box6">
+            <p>Träning</p>
+            <div class="overlay">Exempel text</div>
+        </div>
+    </div>
+    <footer>
+        <div class="footer-container">
+            <div id="first">
+                <p id="myPage">Min sida</p>
+                <ul>
+                    <li><a href="#">Mina bokningar</a></li>
+                    <li><a href="#">Boka tid</a></li>
+                    <li><a href="#">Mina favoriter</a></li>
+                </ul>
+            </div>
+            <div id="second">
+                <p id="popularLinks">Populära länkar</p>
+                <ul>
+                    <li><a href="#">Frisör</a></li>
+                    <li><a href="#">Ansiktsbehandling</a></li>
+                    <li><a href="#">Massage</a></li>
+                    <li><a href="#">Träning</a></li>
+                </ul>
+            </div>
+            <div id="third">
+                <p id="contact">Kontakta oss</p>
+                <ul class="contact-information">
+                    <li>Telefon:</li>
+                    <li>070-1234567</li>
+                    <li>E-post: exempel@exempel.se</li>
+                    <li>Adress:</li>
+                    <li>Norraexempelgatan</li>
+                    <li>123 45 Exempelstad</li>
+                </ul>
+
+            </div>
+        </div>
+    </footer>
+    <script src="myScript.js"></script>
+    <script src="app.css"></script>
+    <script src="auth-page.js"></script>
+</body>
+
+</html>

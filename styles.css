@@ -1,0 +1,560 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+html {
+    height: -webkit-fill-available;
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+}
+[data-auth="user"] { display: none; }
+.is-logged-in [data-auth="user"] { display: inherit; }
+.is-logged-in [data-auth="guest"] { display: none; }
+
+body {
+    font-family: "Roboto Flex", sans-serif;
+    margin: 0;
+    padding: 10px;
+    background-image: url(bilder/beigebackgrund.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    height: -webkit-fill-available;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 0px 0px 30px rgb(136, 208, 241);
+    z-index: 1;
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: 0;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+
+.search-toggle {
+    display: none;
+    background: transparent;
+    border: 0;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background: linear-gradient(to right, skyblue, lightgreen);
+    height: 60px;
+}
+
+.navbar .logo,
+.navbar .search-bar,
+.navbar .nav-links {
+    flex: 0 0 auto;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    padding: 0;
+    margin: 0;
+
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: black;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.nav-links a {
+    display: inline-block;
+    transition: transform 0.1s ease;
+}
+
+.nav-links a:hover {
+    text-shadow: 0px 0px 0.3px black;
+    text-decoration: underline;
+    transform: scale(1.1);
+}
+
+#Kontakt {
+    margin-right: 20px;
+}
+
+h1 {
+    background: linear-gradient(to right, skyblue, lightgreen);
+    text-align: center;
+    margin-top: 80px;
+    box-shadow: 0px 0px 10px blue;
+}
+#userWelcome{
+    background: linear-gradient(to right, skyblue, lightgreen);
+    text-align: center;
+    margin-top: 80px;
+    box-shadow: 0px 0px 10px blue;
+}
+
+#userWelcome {
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    text-align: center;
+    font-size: 2em;
+    font-weight: 700;
+    padding: 1em;
+    border-radius: 8px;
+}
+
+
+.image-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    max-height: auto;
+    max-width: 100%;
+    box-shadow: 0px 0px 10px rgb(101, 101, 101);
+    opacity: 0.9;
+
+}
+
+.image-container img {
+    opacity: 0;
+    animation: slideIn 1s ease forwards;
+    /* forwards gör att den stannar kvar i sista läget */
+}
+
+#blandat {
+    animation-delay: 0s;
+}
+
+#behandling {
+    animation-delay: 0.5s;
+}
+
+#frisör {
+    animation-delay: 1s;
+}
+
+#smink {
+    animation-delay: 1.5s;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.button-container button{
+    margin: 40px;
+    padding: 1em 2em;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(55, 55, 55);
+    position: relative;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-container button::after {
+    content: '';
+    position: absolute;
+    height: 110%;
+    width: 105%;
+    border-radius: 10px;
+    background-image: linear-gradient(to bottom right, #008cff, #e100ff);
+    z-index: -1;
+}
+
+.button-container button:hover {
+    z-index: 0;
+    box-shadow: 20px 0 30px #008cff75, -20px 0 300px #e100ff70;
+}
+
+* p {
+    color: rgb(0, 0, 0);
+}
+
+
+
+#category {
+    background: linear-gradient(to right, skyblue, lightgreen);
+    text-align: center;
+    margin-top: 40px;
+    font-weight: bold;
+    color: black;
+    font-size: 40px;
+    box-shadow: 0px 0px 30px rgb(136, 208, 241);
+}
+
+.category {
+    display: grid;
+    grid-template-columns: repeat(3, 300px);
+    grid-template-rows: repeat(2, 300px);
+    justify-content: center;
+    grid-gap: 20px 20px;
+    ;
+}
+
+.category p {
+    margin: -22px;
+    padding-bottom: 20px;
+    color: white;
+    font-size: 20px;
+    text-shadow: 0px 3px 3px rgba(0, 0, 0, 0.7), 0px 0px 3px rgb(226, 221, 221);
+}
+
+
+.box1,
+.box2,
+.box3,
+.box4,
+.box5,
+.box6 {
+    box-shadow: 0px 0px 30px rgb(136, 208, 241);
+    height: 300px;
+    max-width: 100%;
+
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    justify-content: center;
+    align-items: flex-end;
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 5px;
+    cursor: pointer;
+}
+
+.box1 {
+    background-image: url(bilder/klippning.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.811);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+[class^="box"]:hover .overlay {
+    opacity: 1;
+}
+
+
+.box2 {
+    background-image: url(bilder/Ansiktsbehandling.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.box3 {
+    background-image: url(bilder/Nagelbehandling.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.box4 {
+    background-image: url(bilder/Massage.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.box5 {
+    background-image: url(bilder/Hårvård.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.box6 {
+    background-image: url(bilder/Träning.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+footer {
+
+    width: 100%;
+    height: 140px;
+    margin-top: 60px;
+    background: linear-gradient(to right, skyblue, lightgreen);
+    box-shadow: 0px 0px 30px rgb(136, 208, 241);
+    z-index: 1;
+    text-align: start;
+    font-weight: bold;
+    color: black;
+    font-size: 40px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-evenly;
+    color: rgb(6, 6, 6);
+    font-size: 10px;
+    padding: 10px;
+    margin: 3px;
+}
+
+.footer-container a {
+    text-decoration: none;
+}
+
+.footer-container a {
+    display: inline-block;
+    transition: transform 0.1s ease;
+}
+
+.footer-container a:hover {
+    text-shadow: 0px 0px 0.5px blue;
+    text-decoration: underline;
+    transform: scale(1.15);
+}
+
+.footer-container {
+    list-style: none;
+}
+
+.footer-container ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+
+}
+
+.footer-container li {
+    margin-bottom: 10px;
+}
+
+.contact-information li {
+    margin-bottom: 3px;
+}
+
+.footer-container ul {
+    align-items: flex-start;
+}
+
+@media (max-width: 768px) {
+    .search-button {
+        display: none;
+    }
+    .search-bar.is-open .search-button {
+        display: inline-block;
+    }
+
+    .navbar {
+           width: 100%;
+        overflow: hidden;
+        flex-direction: row;        
+        align-items: center;       
+        justify-content: space-between;        
+        height: auto;        
+        min-height: 60px;        
+        padding: 0 10px;       
+        gap: 8px;
+    }
+
+    h1{
+        margin-top: 120px;
+    }
+
+    .search-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        font-size: 20px;
+        transition: transform 0.9s ease-in-out;
+    }
+    .menu-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: right;
+        width: 40px;
+        height: 40px;
+        order: 2;
+        transition: transform 0.1s ease;
+    }
+
+
+
+    .search-bar input {
+        display: none;
+    }
+
+    .search-bar.is-open input {
+        display: block;
+    }
+
+    .search-bar {
+        flex-direction: row;
+        /* ikon + inputs i rad när öppet */
+        align-items: center;
+        gap: 8px;
+        margin-left: 0;
+        /* ingen onödig sidoförskjutning */
+        order: 2;
+        /* efter menyikonen */
+    }
+
+    .logo {
+        margin-left: 0;
+        order: 1;
+    }
+
+    .logo img {
+        height: 100px;
+        width: auto;
+    }
+
+    .nav-links {
+        flex-direction: column;     
+        margin-left: 0;       
+        gap: 0;      
+        align-items: stretch;      
+        order: 4;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .nav-links.is-open {
+        display: flex;
+    }
+
+    .nav-links.is-open a {
+        display: block;
+        padding: 10px 12px;
+    }
+
+    .nav-links.is-open li+li {
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .image-container {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: nowrap;        
+        max-width: 100%;
+        gap: 2px;
+        overflow: hidden;
+    }
+        .image-container img {
+        flex: 0 0 22%;  /* fyra bilder på rad */
+        max-width: 25%;
+        height: auto;
+    }
+
+    .category {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-gap: 15px;
+    }
+
+    .box1,
+    .box2,
+    .box3,
+    .box4,
+    .box5,
+    .box6 {
+        width: 100%;
+        height: 100px;
+    }
+
+    footer {
+        font-size: 20px;
+        width: 100%;
+        height: auto;
+        text-align: left;
+        padding: 0;
+    }
+
+    .footer-container {
+        flex-direction: row;
+        align-items: left;
+        gap: 12px;
+        font-size: 10px;
+        padding: 3px;
+    }
+
+    .button-container {
+        display: flex;                
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;          
+        flex-wrap: nowrap;
+        gap: 20px;                     
+        width: 100%;                  
+        height: auto;
+        margin-top: 20px;
+    }
+    .button-container button {
+        margin: 0;                    
+        padding: 0.9em 1.2em;        
+        font-size: 16px;              
+        width: 100%;                   
+    }
+    .button-container button::after {
+        width: 102%;                  
+    }
+}

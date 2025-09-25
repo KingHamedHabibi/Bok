@@ -1,0 +1,137 @@
+    <!DOCTYPE html>
+    <html lang="sv">
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Logga in - BokaDinTid</title>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,400;8..144,700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="styles.css">
+      <link rel="stylesheet" href="session.css">
+      <link rel="stylesheet" href="styles2.css">
+    </head>
+    <body>
+      <header >
+                <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="bilder/logo.png" alt="logo.png" width="100" height="100">
+                </a>
+            </div>
+
+            <div class="search-bar">
+                <input type="text" placeholder="Sök...">
+                <input type="text" placeholder="Plats...">
+                <button class="search-toggle" aria-expanded="false" aria-label="Visa sok">🔍</button>
+            </div>
+
+            <button class="menu-toggle" aria-expanded="false" aria-label="Öppna meny">☰</button>
+
+            <ul class="nav-links">
+                <li id="Hem"><a href="index.html">Hem</a></li>
+                <li id="Info"><a href="#about">Om Oss</a></li>
+                <li id="Registrera"><a href="login.html">Registrera dig</a></li>
+                <li id="Kontakt"><a href="#contact">Kontakt</a></li>
+            </ul>
+
+        </nav>
+      </header>
+
+<div class="bdt-auth-overlay" aria-hidden="true">
+  <div class="bdt-auth-sheet" role="dialog" aria-modal="true" aria-labelledby="bdtAuthTitle">
+    <div class="bdt-auth-card">
+      <div class="bdt-auth-header">
+        <h3 class="bdt-auth-title" id="bdtAuthTitle">Logga in eller registrera dig</h3>
+        <button class="bdt-auth-close" id="bdtAuthClose" aria-label="Stäng dialog">✕</button>
+      </div>
+
+      <div class="bdt-auth-tabs">
+        <button class="bdt-auth-tab is-active" data-tab="login">Logga in</button>
+        <button class="bdt-auth-tab" data-tab="register">Registrera</button>
+      </div>
+
+      <div class="bdt-auth-body">
+        <form id="bdtLoginForm">
+          <div class="bdt-field">
+            <label for="bdtLoginEmail">E‑post</label>
+            <input class="bdt-input" type="email" id="bdtLoginEmail" required>
+          </div>
+          <div class="bdt-field">
+            <label for="bdtLoginPassword">Lösenord</label>
+            <input class="bdt-input" type="password" id="bdtLoginPassword" minlength="6" required>
+          </div>
+          <div class="bdt-row" style="margin:10px 0 16px;">
+            <label><input type="checkbox"> Kom ihåg mig</label>
+            <a href="#">Glömt lösenord?</a>
+          </div>
+          <button class="bdt-btn" type="submit">Logga in</button>
+          <p class="bdt-muted" style="margin-top:10px;">Har du inget konto? <a href="#" onclick="document.querySelector('.bdt-auth-tab[data-tab=register]').click();return false;">Registrera dig</a></p>
+          <div class="bdt-social">
+            <button class="bdt-btn" type="button">Google</button>
+            <button class="bdt-btn" type="button">Facebook</button>
+          </div>
+        </form>
+
+        <form id="bdtRegisterForm" class="is-hidden">
+          <div class="bdt-field">
+            <label for="bdtRegName">Namn</label>
+            <input class="bdt-input" type="text" id="bdtRegName" required>
+          </div>
+          <div class="bdt-field">
+            <label for="bdtRegEmail">E-post</label>
+            <input class="bdt-input" type="email" id="bdtRegEmail" required>
+          </div>
+          <div class="bdt-field">
+            <label for="bdtRegPassword">Lösenord</label>
+            <input class="bdt-input" type="password" id="bdtRegPassword" minlength="6" required>
+          </div>
+          <div class="bdt-field">
+            <label for="bdtRegPassword2">Bekräfta lösenord</label>
+            <input class="bdt-input" type="password" id="bdtRegPassword2" minlength="6" required>
+          </div>
+          <button class="bdt-btn" type="submit">Skapa konto</button>
+          <p class="bdt-muted" style="margin-top:10px;">Har du redan ett konto? <a href="#" onclick="document.querySelector('.bdt-auth-tab[data-tab=login]').click();return false;">Logga in</a></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<footer>
+        <div class="footer-container">
+            <div id="first">
+                <p id="myPage">Min sida</p>
+                <ul>
+                    <li><a href="#">Mina bokningar</a></li>
+                    <li><a href="#">Boka tid</a></li>
+                    <li><a href="#">Mina favoriter</a></li>
+                </ul>
+            </div>
+            <div id="second">
+                <p id="popularLinks">Populära länkar</p>
+                <ul>
+                    <li><a href="#">Frisör</a></li>
+                    <li><a href="#">Ansiktsbehandling</a></li>
+                    <li><a href="#">Massage</a></li>
+                    <li><a href="#">Träning</a></li>
+                </ul>
+            </div>
+            <div id="third">
+                <p id="contact">Kontakta oss</p>
+                <ul class="contact-information">
+                    <li>Telefon:</li>
+                    <li>070-1234567</li>
+                    <li>E-post: exempel@exempel.se</li>
+                    <li>Adress:</li>
+                    <li>Norraexempelgatan</li>
+                    <li>123 45 Exempelstad</li>
+                </ul>
+
+            </div>
+        </div>
+    </footer>
+
+      <script defer src="auth-page.js"></script>
+      <script src="myScript.js"></script>
+    </body>
+    </html>

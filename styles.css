@@ -65,12 +65,6 @@ nav {
     height: 60px;
 }
 
-.navbar .logo,
-.navbar .search-bar,
-.navbar .nav-links {
-    flex: 0 0 auto;
-}
-
 .nav-links {
     list-style: none;
     display: flex;
@@ -85,9 +79,7 @@ nav {
     color: black;
     font-size: 13px;
     font-weight: bold;
-}
 
-.nav-links a {
     display: inline-block;
     transition: transform 0.1s ease;
 }
@@ -108,12 +100,7 @@ h1 {
     margin-top: 80px;
     box-shadow: 0px 0px 10px blue;
 }
-#userWelcome{
-    background: linear-gradient(to right, skyblue, lightgreen);
-    text-align: center;
-    margin-top: 80px;
-    box-shadow: 0px 0px 10px blue;
-}
+
 
 #userWelcome {
     display: flex;
@@ -124,6 +111,11 @@ h1 {
     font-weight: 700;
     padding: 1em;
     border-radius: 8px;
+
+    background: linear-gradient(to right, skyblue, lightgreen);
+    text-align: center;
+    margin-top: 80px;
+    box-shadow: 0px 0px 10px blue;
 }
 
 
@@ -141,7 +133,7 @@ h1 {
 .image-container img {
     opacity: 0;
     animation: slideIn 1s ease forwards;
-    /* forwards gör att den stannar kvar i sista läget */
+   
 }
 
 #blandat {
@@ -226,15 +218,16 @@ h1 {
     color: black;
     font-size: 40px;
     box-shadow: 0px 0px 30px rgb(136, 208, 241);
+    flex: 1 1 100%;
 }
 
 .category {
     display: grid;
-    grid-template-columns: repeat(3, 300px);
-    grid-template-rows: repeat(2, 300px);
+    grid-template-columns: repeat(3, minmax(220px, 1fr));
+ /*    grid-template-rows: repeat(2, 300px); */
     justify-content: center;
     grid-gap: 20px 20px;
-    ;
+    scale: .7;
 }
 
 .category p {
@@ -253,7 +246,7 @@ h1 {
 .box5,
 .box6 {
     box-shadow: 0px 0px 30px rgb(136, 208, 241);
-    height: 300px;
+    aspect-ratio: 1 / 1;
     max-width: 100%;
 
     display: flex;
@@ -265,6 +258,7 @@ h1 {
     font-weight: bold;
     padding-bottom: 5px;
     cursor: pointer;
+    border-radius: 10px;
 }
 
 .box1 {
@@ -472,9 +466,6 @@ footer {
         gap: 0;      
         align-items: stretch;      
         order: 4;
-    }
-
-    .nav-links {
         display: none;
     }
 
@@ -506,9 +497,8 @@ footer {
     }
 
     .category {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
-        grid-gap: 15px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        scale: 1;
     }
 
     .box1,

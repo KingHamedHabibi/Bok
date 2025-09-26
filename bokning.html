@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BokaDinTid.nu | Boka tid</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="bokning.css">
+</head>
+<body class="booking-body">
+    <!-- Sidhuvud med navigation f&ouml;r konsekvent upplevelse -->
+    <header class="booking-header">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="bilder/logo.png" alt="BokaDinTid.nu logotyp" width="90" height="90">
+                </a>
+            </div>
+            <div class="search-bar compact">
+                <input type="text" placeholder="S&ouml;k tj&auml;nst...">
+                <input type="text" placeholder="Plats...">
+                <button class="search-button" type="submit">S&ouml;k</button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Hem</a></li>
+                <li><a href="#calendar">Kalender</a></li>
+                <li><a href="#my-bookings">Mina bokningar</a></li>
+                <li><a href="#faq">Fr&aring;gor &amp; svar</a></li>
+            </ul>
+            <button class="menu-toggle" aria-expanded="false" aria-label="&Ouml;ppna meny">&#9776;</button>
+        </nav>
+    </header>
+    <!-- Huvudlayout med kalender och sidopanel -->
+    <main class="booking-layout">
+        <section class="calendar-shell" id="calendar">
+            <div class="calendar-card">
+                <header class="calendar-header">
+                    <div class="view-toggle" role="tablist" aria-label="Kalendervyer">
+                        <button class="view-button is-active" data-view="month" role="tab" aria-selected="true">M&aring;nad</button>
+                        <button class="view-button" data-view="week" role="tab" aria-selected="false">Vecka</button>
+                        <button class="view-button" data-view="day" role="tab" aria-selected="false">Dag</button>
+                    </div>
+                    <div class="date-controls" aria-label="Datumkontroller">
+                        <button class="nav-button" data-action="prev" aria-label="F&ouml;reg&aring;ende period">&lsaquo;</button>
+                        <button class="nav-button secondary" data-action="today">Idag</button>
+                        <button class="nav-button" data-action="next" aria-label="N&auml;sta period">&rsaquo;</button>
+                    </div>
+                    <div class="current-range" id="current-range" aria-live="polite"></div>
+                </header>
+                <div class="calendar-body">
+                    <div class="day-labels" id="day-labels"></div>
+                    <div class="calendar-view" id="calendar-view" aria-live="polite"></div>
+                </div>
+            </div>
+            <section class="slot-panel">
+                <header>
+                    <h2>Lediga tider</h2>
+                    <p id="selected-date-label"></p>
+                </header>
+                <div class="slot-list" id="slot-list" role="list"></div>
+            </section>
+        </section>
+        <aside class="booking-sidebar" id="my-bookings">
+            <section class="booking-overview">
+                <h2>Dina bokningar</h2>
+                <p class="booking-hint">Hantera bokningar genom att klicka p&aring; korten nedan.</p>
+                <div class="booking-empty hidden" id="booking-empty">
+                    <p>Du har inga bokningar &auml;n. V&auml;lj en tid i kalendern f&ouml;r att komma ig&aring;ng.</p>
+                </div>
+                <div class="booking-cards" id="booking-cards"></div>
+            </section>
+            <section class="info-panel" id="faq">
+                <h2>Snabbguide</h2>
+                <ul>
+                    <li>V&auml;lj vy f&ouml;r att hitta en tid som passar.</li>
+                    <li>Klicka p&aring; en ledig tid f&ouml;r att boka.</li>
+                    <li>Bokade tider markeras och visas i listan.</li>
+                    <li>Du kan &auml;ndra eller avboka genom korten.</li>
+                </ul>
+            </section>
+        </aside>
+    </main>
+    <!-- Modal f&ouml;r bokning och bekr&auml;ftelser -->
+    <div class="modal hidden" id="booking-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-content">
+            <button class="modal-close" type="button" aria-label="St&auml;ng">&times;</button>
+            <div class="modal-body" id="modal-body">
+                <h2 id="modal-title">Bekr&auml;fta bokning</h2>
+                <p class="modal-slot" id="modal-slot"></p>
+                <form id="booking-form" class="booking-form">
+                    <div class="form-field">
+                        <label for="customer-name">Namn</label>
+                        <input id="customer-name" name="name" type="text" required placeholder="Ditt fullst&auml;ndiga namn">
+                    </div>
+                    <div class="form-field">
+                        <label for="customer-email">E-post</label>
+                        <input id="customer-email" name="email" type="email" required placeholder="namn@example.se">
+                    </div>
+                    <div class="form-field">
+                        <label for="customer-phone">Telefonnummer</label>
+                        <input id="customer-phone" name="phone" type="tel" required placeholder="070-123 45 67" pattern="^[0-9+\- ]{6,}$">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="ghost-button" id="modal-cancel">Avbryt</button>
+                        <button type="submit" class="primary-button">Bekr&auml;fta</button>
+                    </div>
+                </form>
+                <div class="modal-feedback hidden" id="booking-success">
+                    <div class="success-icon" aria-hidden="true">&#10003;</div>
+                    <h2>Tack f&ouml;r bokningen!</h2>
+                    <p id="success-message"></p>
+                    <button type="button" class="primary-button" id="success-close">St&auml;ng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-backdrop hidden" id="modal-backdrop" aria-hidden="true"></div>
+    <div class="toast hidden" id="toast" role="status" aria-live="polite"></div>
+    <script src="bokning.js" defer></script>
+</body>
+</html>

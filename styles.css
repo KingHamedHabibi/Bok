@@ -395,7 +395,7 @@ footer {
     }
 
     .navbar {
-           width: 100%;
+        width: 100%;
         overflow: hidden;
         flex-direction: row;        
         align-items: center;       
@@ -441,13 +441,10 @@ footer {
 
     .search-bar {
         flex-direction: row;
-        /* ikon + inputs i rad när öppet */
         align-items: center;
         gap: 8px;
         margin-left: 0;
-        /* ingen onödig sidoförskjutning */
         order: 2;
-        /* efter menyikonen */
     }
 
     .logo {
@@ -491,7 +488,7 @@ footer {
         overflow: hidden;
     }
         .image-container img {
-        flex: 0 0 22%;  /* fyra bilder på rad */
+        flex: 0 0 22%; 
         max-width: 25%;
         height: auto;
     }

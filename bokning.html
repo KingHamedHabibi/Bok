@@ -8,26 +8,30 @@
     <link rel="stylesheet" href="bokning.css">
 </head>
 <body class="booking-body">
-    <!-- Sidhuvud med navigation f&ouml;r konsekvent upplevelse -->
-    <header class="booking-header">
+    <header>
         <nav class="navbar">
             <div class="logo">
                 <a href="index.html">
-                    <img src="bilder/logo.png" alt="BokaDinTid.nu logotyp" width="90" height="90">
+                    <img src="bilder/logo.png" alt="logo.png" width="100" height="100">
                 </a>
             </div>
-            <div class="search-bar compact">
+
+            <div class="search-bar">
                 <input type="text" placeholder="Sök tjänst...">
                 <input type="text" placeholder="Plats...">
-                <button class="search-button" type="submit">S&ouml;k</button>
+                <button class="search-button" type="submit">Sök</button>
+                <button class="search-toggle" aria-expanded="false" aria-label="Visa sok">🔍</button>
             </div>
+
+            
             <ul class="nav-links">
-                <li><a href="index.html">Hem</a></li>
-                <li><a href="#calendar">Kalender</a></li>
-                <li><a href="#my-bookings">Mina bokningar</a></li>
-                <li><a href="#faq">Frågor &amp; svar</a></li>
+                <li id="Hem"><a href="inloged.html">Hem</a></li>
+                <li id="Info"><a href="#about">Om Oss</a></li>
+                <li id="Registrera"><a href="login.html">Registrera dig</a></li>
+                <li id="Kontakt"><a href="#contact">Kontakt</a></li>
             </ul>
-            <button class="menu-toggle" aria-expanded="false" aria-label="&Ouml;ppna meny">&#9776;</button>
+            <button class="menu-toggle" aria-expanded="false" aria-label="Öppna meny">☰</button>
+
         </nav>
     </header>
     <!-- Huvudlayout med kalender och sidopanel -->
@@ -117,5 +121,7 @@
     <div class="modal-backdrop hidden" id="modal-backdrop" aria-hidden="true"></div>
     <div class="toast hidden" id="toast" role="status" aria-live="polite"></div>
     <script src="bokning.js" defer></script>
-</body>
+    <script src="myScript.js"></script>
+    <script src="auth-page.js"></script>
+</body> <script src="app.js"></script>
 </html>

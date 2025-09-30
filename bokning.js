@@ -3,10 +3,21 @@
 
     const DAY_NAMES = ['M\u00e5n', 'Tis', 'Ons', 'Tor', 'Fre', 'L\u00f6r', 'S\u00f6n'];
     const BUSINESS_DAYS = new Set([1, 2, 3, 4, 5]);
-    const TIME_SLOTS = Array.from({ length: 11 }, (_, index) => {
-        const hour = String(index + 8).padStart(2, '0');
-        return `${hour}:00`;
-    });
+    const OPEN_HOUR = 8;
+    const CLOSE_HOUR = 17;
+    const SLOT_INTERVAL_MIN = 30;
+    const LUNCH_START_MIN = 12 * 60;
+    const LUNCH_END_MIN = 13 * 60;
+    const TIME_SLOTS = (() => {
+        const out = [];
+        for (let m = OPEN_HOUR * 60; m <= CLOSE_HOUR * 60; m += SLOT_INTERVAL_MIN) {
+            if (m >= LUNCH_START_MIN && m < LUNCH_END_MIN) continue;
+            const hh = String(Math.floor(m / 60)).padStart(2, '0');
+            const mm = String(m % 60).padStart(2, '0');
+            out.push(`${hh}:${mm}`);
+        }
+        return out;
+    })();
     const STORAGE_KEY = 'bdt.bookings.v1';
 
     const toDateKey = (date) => {

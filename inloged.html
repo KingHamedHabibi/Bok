@@ -10,6 +10,7 @@
       <link rel="stylesheet" href="auth.css">
       <link rel="stylesheet" href="styles2.css">
       <link rel="preconnect" href="https://fonts.googleapis.com">
+       <link rel="stylesheet" href="pop-up.css">
 </head>
 <body>
         <header>
@@ -23,18 +24,18 @@
             <div class="search-bar">
                 <input type="text" placeholder="Sök...">
                 <input type="text" placeholder="Plats...">
-                <button class="search-toggle" aria-expanded="false" aria-label="Visa sok">🔍</button>
+                <button class="search-toggle" aria-expanded="false" aria-label="Visa sok">�Y"?</button>
             </div>
 
             
             <ul class="nav-links">
-                <li id="Hem"><a href="#home">Hem</a></li>
+                <li id="Hem"><a href="#home">Min sida</a></li>
                 <li id="Info"><a href="#about">Om Oss</a></li>
                 <li id="Registrera"><a href="login.html">Registrera dig</a></li>
                 <li id="Kontakt"><a href="#contact">Kontakt</a></li>
                 <li id="setting"><a href="#setting">Setting</a></li>
             </ul>
-            <button class="menu-toggle" aria-expanded="false" aria-label="Öppna meny">☰</button>
+            <button class="menu-toggle" aria-expanded="false" aria-label="�-ppna meny">�~�</button>
 
         </nav>
     </header>
@@ -54,7 +55,21 @@
         <div class="button-container">
         <button id="book">Boka tid</button>
         <button id="booked">Mina bokningar</button>
-    </div>
+    </div>  
+   
+    <dialog class="mbk-dialog" id="mbk-dialog" aria-labelledby="mbk-title">
+      <div class="mbk-header">
+        <h2 id="mbk-title">Mina bokningar</h2>
+      </div>
+      <div class="mbk-body">
+        <div id="mbk-list" class="mbk-list" role="list"></div>
+        <p id="mbk-empty" class="mbk-empty" hidden>Inga bokningar ännu.</p>
+      </div>
+      <div class="mangeBooking" id="actions">
+        <button type="button" class="bdt-btn" id="manage">Hantera bokningar</button>
+        <button type="button" class="bdt-btn" id="close">Stäng</button>
+      </div>
+    </dialog>
     <footer>
         <div class="footer-container">
             <div id="first">
@@ -92,140 +107,6 @@
     <script src="myScript.js"></script>
     <script src="app.js"></script>
 
-    <!-- MBK: Enkel modal för "Mina bokningar" -->
-    <style>
-      .mbk-dialog { 
-        border: 1px solid var(--border, #d0d7de);
-        background: var(--surface, #ffffff);
-        color: var(--text, #0c2238);
-        border-radius: 10px; 
-        padding: 0; 
-        width: min(92vw, 640px);
-      }
-      .mbk-dialog::backdrop { background: rgba(0,0,0,0.4); }
-      .mbk-header { padding: 16px 20px; border-bottom: 1px solid var(--border, #e5e7eb); }
-      .mbk-header h2 { margin: 0; font-size: 1.25rem; }
-      .mbk-body { padding: 16px 20px; max-height: 60vh; overflow: auto; }
-      .mbk-list { display: grid; gap: 8px; }
-      .mbk-item { padding: 10px 12px; border: 1px solid var(--border, #e5e7eb); border-radius: 8px; background: var(--surface, #fff); }
-      .mbk-item strong { display: block; }
-      .mbk-item small { color: var(--text-muted, #6b7280); }
-      .mbk-empty { color: var(--text-muted, #6b7280); }
-      .mbk-actions { display: flex; gap: 10px; justify-content: flex-end; padding: 14px 20px; border-top: 1px solid var(--border, #e5e7eb); }
-      .mbk-primary { background: var(--primary, #6ec5ff); color: var(--on-primary, #0c2238); border: 1px solid transparent; padding: 10px 14px; border-radius: 8px; cursor: pointer; }
-      .mbk-ghost { background: transparent; color: var(--text, #0c2238); border: 1px solid var(--border, #e5e7eb); padding: 10px 14px; border-radius: 8px; cursor: pointer; }
-      .mbk-actions button:focus { outline: 3px solid rgba(110, 197, 255, 0.6); outline-offset: 2px; }
-    </style>
-    <dialog class="mbk-dialog" id="mbk-dialog" aria-labelledby="mbk-title">
-      <div class="mbk-header">
-        <h2 id="mbk-title">Mina bokningar</h2>
-      </div>
-      <div class="mbk-body">
-        <div id="mbk-list" class="mbk-list" role="list"></div>
-        <p id="mbk-empty" class="mbk-empty" hidden>Inga bokningar ännu.</p>
-      </div>
-      <div class="mbk-actions">
-        <button type="button" class="mbk-primary" id="mbk-manage">Hantera bokningar</button>
-        <button type="button" class="mbk-ghost" id="mbk-close">Stäng</button>
-      </div>
-    </dialog>
-    <script>
-      (function () {
-        var dialog = document.getElementById('mbk-dialog');
-        if (!dialog) return;
-        // Försök hitta öppningsknappen: föredra #mbk-open-btn, annars befintliga #booked, annars textmatch
-        var openBtn = document.getElementById('mbk-open-btn') || document.getElementById('booked') || (function(){
-          var candidates = document.querySelectorAll('button, a');
-          for (var i = 0; i < candidates.length; i++) {
-            var t = (candidates[i].textContent || '').trim().toLowerCase();
-            if (t === 'mina bokningar') return candidates[i];
-          }
-          return null;
-        })();
-        if (!openBtn) return;
-
-        var listEl = document.getElementById('mbk-list');
-        var emptyEl = document.getElementById('mbk-empty');
-        var closeBtn = document.getElementById('mbk-close');
-        var manageBtn = document.getElementById('mbk-manage');
-        var lastFocus = null;
-
-        function readBookings() {
-          if (Array.isArray(window.myBookings)) return window.myBookings;
-          try {
-            var raw = window.localStorage ? localStorage.getItem('my_bookings') : null;
-            if (raw) {
-              var parsed = JSON.parse(raw);
-              if (Array.isArray(parsed)) return parsed;
-            }
-          } catch (e) {}
-          return [];
-        }
-
-        function parseYMD(dateStr) {
-          var m = /^\s*(\d{4})-(\d{2})-(\d{2})\s*$/.exec(String(dateStr || ''));
-          if (m) return new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
-          var d = new Date(dateStr);
-          return isNaN(d.getTime()) ? null : d;
-        }
-
-        function formatSv(date) {
-          try {
-            return new Intl.DateTimeFormat('sv-SE', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }).format(date);
-          } catch (e) {
-            return date.toLocaleDateString('sv-SE');
-          }
-        }
-
-        function renderList(items) {
-          listEl.innerHTML = '';
-          if (!items || !items.length) {
-            emptyEl.hidden = false;
-            return;
-          }
-          emptyEl.hidden = true;
-          items.forEach(function (b) {
-            var dateTxt = '', timeTxt = '', extra = '';
-            if (b && b.date) {
-              var d = parseYMD(b.date);
-              dateTxt = d ? formatSv(d) : String(b.date);
-            }
-            if (b && b.time) timeTxt = String(b.time);
-            if (b && (b.name || b.service || b.tjanst)) extra = b.name || b.service || b.tjanst;
-            if (b && (b.place || b.location || b.plats)) {
-              extra = extra ? (extra + ' · ' + (b.place || b.location || b.plats)) : (b.place || b.location || b.plats);
-            }
-
-            var item = document.createElement('div');
-            item.className = 'mbk-item';
-            var primary = (dateTxt && timeTxt) ? (dateTxt + ' · ' + timeTxt) : (dateTxt || timeTxt || '');
-            item.innerHTML = primary ? ('<strong>' + primary + '</strong>') : '';
-            if (extra) {
-              var small = document.createElement('small');
-              small.textContent = extra;
-              item.appendChild(small);
-            }
-            item.setAttribute('role', 'listitem');
-            listEl.appendChild(item);
-          });
-        }
-
-        function openModal() {
-          lastFocus = document.activeElement;
-          renderList(readBookings());
-          dialog.showModal();
-        }
-        function closeModal() {
-          dialog.close();
-        }
-
-        openBtn.addEventListener('click', openModal);
-        closeBtn.addEventListener('click', closeModal);
-        manageBtn.addEventListener('click', function(){ window.location.href = 'bokning.html'; });
-        dialog.addEventListener('cancel', function (e) { e.preventDefault(); closeModal(); });
-        dialog.addEventListener('close', function () { if (lastFocus && lastFocus.focus) setTimeout(function(){ lastFocus.focus(); }, 0); });
-        dialog.addEventListener('click', function (e) { if (e.target === dialog) closeModal(); });
-      })();
-    </script>
+    <script src="pop-up.js"></script>
 </body>
 </html>

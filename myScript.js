@@ -27,10 +27,23 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 const booking = document.getElementById("boka");
+const boka = document.getElementById("book");
 const login = document.getElementById("inloggning");
-booking.onclick = function(){
-    window.location.href = "booking.html";
+
+if (booking) {
+  booking.addEventListener('click', function () {
+    window.location.href = "bokning.html";
+  });
 }
-login.onclick = function(){
+
+if (boka) {
+  boka.addEventListener('click', function () {
+    window.location.href = "bokning.html";
+  });
+}
+
+if (login) {
+  login.addEventListener('click', function () {
     window.location.href = "login.html";
+  });
 }
